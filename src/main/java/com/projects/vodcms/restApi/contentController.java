@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,11 +33,13 @@ public class contentController {
 	}
 
 	@GetMapping("/")
+	@CrossOrigin
 	public List<Content> get() {
 		return contentService.getAll();
 	}
 
 	@PostMapping("/add")
+	@CrossOrigin
 	public void add(@RequestBody RequestWrapper requestWrapper) {
 		Content content = requestWrapper.getContent();
 		Licence licence = licencesService.getById(requestWrapper.getLicence().getId());
@@ -46,21 +49,25 @@ public class contentController {
 	}
 
 	@PostMapping("/update")
+	@CrossOrigin
 	public void update(@RequestBody Content content) {
 		contentService.update(content);
 	}
 
 	@PostMapping("/delete")
+	@CrossOrigin
 	public void delete(@RequestBody Content content) {
 		contentService.delete(content);
 	}
 
 	@GetMapping("/{id}")
+	@CrossOrigin
 	public Content getById(@PathVariable int id) {
 		return contentService.getById(id);
 	}
 
 	@GetMapping("/contentLicences/{id}")
+	@CrossOrigin
 	public ContentDTO getByIdDTO(@PathVariable int id) {
 		ContentDTO contentDTO = new ContentDTO();
 		Content content = contentService.getById(id);
