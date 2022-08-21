@@ -47,7 +47,8 @@ public class HibernateContentDal implements IContentDal {
 	@Transactional
 	public void delete(Content content) {
 		Session session = entityManager.unwrap(Session.class);
-		session.delete(content);
+		Content cityToDelete = session.get(Content.class, content.getId());
+		session.delete(cityToDelete);
 	}
 
 	@Override

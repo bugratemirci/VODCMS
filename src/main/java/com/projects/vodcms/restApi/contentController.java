@@ -42,9 +42,10 @@ public class contentController {
 	@CrossOrigin
 	public void add(@RequestBody RequestWrapper requestWrapper) {
 		Content content = requestWrapper.getContent();
-		Licence licence = licencesService.getById(requestWrapper.getLicence().getId());
-
-		content.getLicences().add(licence);
+		requestWrapper.getLicence().forEach(licenceId -> {
+			Licence licence = licencesService.getById(licenceId.getId());
+			content.getLicences().add(licence);
+		});
 		contentService.add(content);
 	}
 
@@ -57,6 +58,7 @@ public class contentController {
 	@PostMapping("/delete")
 	@CrossOrigin
 	public void delete(@RequestBody Content content) {
+		System.out.println("x");
 		contentService.delete(content);
 	}
 

@@ -1,8 +1,10 @@
 package com.projects.vodcms.Entities;
 
+import java.util.List;
+
 public class RequestWrapper {
     Content content;
-    Licence licence;
+    List<Licence> licence;
 
     public RequestWrapper() {
     }
@@ -15,11 +17,11 @@ public class RequestWrapper {
         this.content = content;
     }
 
-    public Licence getLicence() {
-        return licence;
+    public List<Licence> getLicence() {
+        return this.licence;
     }
 
-    public void setLicence(Licence licence) {
+    public void setLicence(List<Licence> licence) {
         this.licence = licence;
     }
 
