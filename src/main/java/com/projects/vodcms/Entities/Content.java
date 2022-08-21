@@ -47,6 +47,9 @@ public class Content {
 	@Column(name = "content_video_url")
 	private String contentVideoUrl;
 
+	@Column(name = "content_description")
+	private String contentDescription;
+
 	@JsonIgnore
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(name = "contents_licences", joinColumns = { @JoinColumn(name = "content_id") }, inverseJoinColumns = {
