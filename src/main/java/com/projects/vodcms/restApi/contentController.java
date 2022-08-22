@@ -1,5 +1,6 @@
 package com.projects.vodcms.restApi;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,13 +47,28 @@ public class contentController {
 			Licence licence = licencesService.getById(licenceId.getId());
 			content.getLicences().add(licence);
 		});
-		contentService.add(content);
+		// contentService.add(content);
 	}
 
 	@PostMapping("/update")
 	@CrossOrigin
-	public void update(@RequestBody Content content) {
-		contentService.update(content);
+	public void update(@RequestBody RequestWrapper requestWrapper) {
+		Content content = requestWrapper.getContent();
+		List<Licence> licences = new ArrayList<>();
+		Content updatingContent = contentService.getById(content.getId());
+		updatingContent.setContentDescription(content.getContentDescription());
+		updatingContent.setContentName(content.getContentName());
+		updatingContent.setContentPosterUrl(content.getContentPosterUrl());
+		updatingContent.setContentVideoUrl(content.getContentVideoUrl());
+		updatingContent.setContentStatus(content.getContentStatus());
+
+		requestWrapper.getLicence().forEach(licenceId -> {
+			Licence licence = licencesService.getById(licenceId.getId());
+			licences.add(licence);
+		});
+		updatingContent.setLicences(licences);
+
+		contentService.update(updatingContent);
 	}
 
 	@PostMapping("/delete")
