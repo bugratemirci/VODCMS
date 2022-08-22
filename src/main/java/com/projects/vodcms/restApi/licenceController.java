@@ -39,7 +39,14 @@ public class licenceController {
     @PostMapping("/update")
     @CrossOrigin
     public void update(@RequestBody Licence licence) {
-        licencesService.update(licence);
+        Licence updatingLicence = licencesService.getById(licence.getId());
+        updatingLicence.setEndTime(licence.getEndTime());
+        updatingLicence.setStartTime(licence.getStartTime());
+        updatingLicence.setLicenceName(licence.getLicenceName());
+        
+        
+        
+        licencesService.update(updatingLicence);
     }
 
     @PostMapping("/delete")

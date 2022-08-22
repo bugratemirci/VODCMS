@@ -46,7 +46,8 @@ public class HibernateLicenceDal implements ILicenceDal {
     @Transactional
     public void delete(Licence licence) {
         Session session = entityManager.unwrap(Session.class);
-        session.delete(licence);
+        Licence licenceToDelete = session.get(Licence.class, licence.getId());
+        session.delete(licenceToDelete);
     }
 
     @Override

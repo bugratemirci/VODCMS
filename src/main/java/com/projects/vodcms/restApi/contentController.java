@@ -39,6 +39,21 @@ public class contentController {
 		return contentService.getAll();
 	}
 
+	@GetMapping("/contentsDTO")
+	@CrossOrigin
+	public List<ContentDTO> getContentsDTO() {
+		List<Content> contents = contentService.getAll();
+		List<ContentDTO> contentDTOs = new ArrayList<>();
+		contents.forEach(content -> {
+			ContentDTO contentDTO = new ContentDTO();
+			contentDTO.setContent(content);
+			contentDTO.setLicences(content.getLicences());
+			contentDTOs.add(
+					contentDTO);
+		});
+		return contentDTOs;
+	}
+
 	@PostMapping("/add")
 	@CrossOrigin
 	public void add(@RequestBody RequestWrapper requestWrapper) {
@@ -47,7 +62,7 @@ public class contentController {
 			Licence licence = licencesService.getById(licenceId.getId());
 			content.getLicences().add(licence);
 		});
-		// contentService.add(content);
+		contentService.add(content);
 	}
 
 	@PostMapping("/update")
@@ -74,7 +89,6 @@ public class contentController {
 	@PostMapping("/delete")
 	@CrossOrigin
 	public void delete(@RequestBody Content content) {
-		System.out.println("x");
 		contentService.delete(content);
 	}
 
