@@ -43,7 +43,7 @@ public class userController {
     @CrossOrigin
     public void add(@RequestBody User user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String password = passwordEncoder.encode("12345");
+        String password = passwordEncoder.encode(user.getPassword());
         user.setPassword(password);
         iUserService.add(user);
     }
