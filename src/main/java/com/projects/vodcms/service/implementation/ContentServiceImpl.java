@@ -24,7 +24,7 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public Long edit(Content content, Long id) {
+    public Long edit(Content content, Long id ) {
         Content tempContent = contentRepository.findContentById(id);
 
         tempContent.setContentDescription(content.getContentDescription());
