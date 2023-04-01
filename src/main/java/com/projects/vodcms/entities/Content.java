@@ -28,31 +28,25 @@ import lombok.*;
 @Setter
 public class Content {
 
-	@Id
-	@Column(name = "content_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "content_name")
-	private String contentName;
+    private String contentName;
 
-	@Column(name = "content_status")
-	private String contentStatus;
+    private String contentStatus;
 
-	@Column(name = "content_poster_url")
-	private String contentPosterUrl;
+    private String contentPosterUrl;
 
-	@Column(name = "content_video_url")
-	private String contentVideoUrl;
+    private String contentVideoUrl;
 
-	@Column(name = "content_description")
-	private String contentDescription;
+    private String contentDescription;
 
-	@JsonIgnore
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(name = "contents_licences", joinColumns = { @JoinColumn(name = "content_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "licence_id") })
-	private List<Licence> licences = new ArrayList<>();
+    @JsonIgnore
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "contents_licences", joinColumns = {@JoinColumn(name = "content_id")}, inverseJoinColumns = {
+            @JoinColumn(name = "licence_id")})
+    private List<Licence> licences = new ArrayList<>();
 
 
 }

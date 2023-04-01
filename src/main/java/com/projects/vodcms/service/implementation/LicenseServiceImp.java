@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class LicenseServiceImpl implements LicenseService {
+public class LicenseServiceImp implements LicenseService {
     private final LicenseRepository licenseRepository;
 
     @Override
