@@ -3,19 +3,31 @@ package com.projects.vodcms.service.implementation;
 import com.projects.vodcms.entities.Content;
 import com.projects.vodcms.repository.ContentRepository;
 import com.projects.vodcms.service.ContentService;
+import com.projects.vodcms.specification.ContentSpecification;
+import com.projects.vodcms.specification.SearchCriteria;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class ContentServiceImpl implements ContentService {
+public class ContentServiceImp implements ContentService {
     private final ContentRepository contentRepository;
 
     @Override
     public List<Content> getAll() {
         return contentRepository.findAll();
+    }
+
+    @Override
+    public Page<Content> getAllPageable(Integer page, Integer itemCount, String filter) {
+        Pageable pageable = PageRequest.of(page, itemCount);
+        ContentSpecification specification = new ContentSpecification(new SearchCriteria("contentName", ":", filter));
+        return contentRepository.findAll(specification, pageable);
     }
 
     @Override

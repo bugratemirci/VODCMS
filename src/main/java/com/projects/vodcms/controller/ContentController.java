@@ -3,6 +3,7 @@ package com.projects.vodcms.controller;
 import com.projects.vodcms.entities.Content;
 import com.projects.vodcms.service.ContentService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,13 @@ public class ContentController {
     @GetMapping
     public ResponseEntity<List<Content>> getAll() {
         return ResponseEntity.ok(contentService.getAll());
+    }
+
+    @GetMapping("/pageable")
+    public ResponseEntity<Page<Content>> getAllPageable(@RequestParam("page") Integer page,
+                                                        @RequestParam("itemCount") Integer itemCount,
+                                                        @RequestParam("filter") String filter) {
+        return ResponseEntity.ok(contentService.getAllPageable(page, itemCount, filter));
     }
 
     @PostMapping
